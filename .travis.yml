@@ -1,0 +1,15 @@
+sudo: required
+
+language: python
+
+python:
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+install:
+  - sudo apt-get update
+  - pip install -r environments/requirements-test.txt
+
+script:
+  - pytest --disable-warnings
