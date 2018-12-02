@@ -2,7 +2,6 @@ version: '2'
 
 services:
   web_app:
-    image: web_app
     build:
       context: ./web_app/
       dockerfile: Dockerfile
@@ -32,6 +31,16 @@ services:
       - POSTGRES_DB=cime
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  ui:
+    build:
+      context: ./ui/
+      dockerfile: Dockerfile
+    privileged: true
+    volumes:
+      - media:/ui/assets
+    depends_on:
+      - web_app
 
 volumes:
   pgdata: {}
