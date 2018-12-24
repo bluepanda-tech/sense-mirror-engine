@@ -46,7 +46,6 @@ services:
     image: v2tec/watchtower:armhf-latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /root/.docker/config.json:/config.json
     restart: unless-stopped
 
 volumes:
