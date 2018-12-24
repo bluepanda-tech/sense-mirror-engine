@@ -2,7 +2,7 @@ version: '2'
 
 services:
   web_app:
-    image: bluepandatech/sensemirrorengine_web_app
+    image: bluepandatech/sensemirrorengine_web_app:latest
     ports:
       - 8000:8000
     volumes:
@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
 
   nginx:
-    image: bluepandatech/sensemirrorengine_nginx
+    image: bluepandatech/sensemirrorengine_nginx:latest
     ports:
       - 80:80
     volumes:
@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
 
   ui:
-    image: bluepandatech/sensemirrorengine_ui
+    image: bluepandatech/sensemirrorengine_ui:latest
     privileged: true
     volumes:
       - /home/pi/media:/ui/assets
