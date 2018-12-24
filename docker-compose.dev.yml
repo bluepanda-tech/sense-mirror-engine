@@ -6,10 +6,10 @@ services:
       context: ./web_app/
       dockerfile: Dockerfile
     ports:
-      - 8000
+      - 8000:8000
     volumes:
-      - ./web_app:/web_app
-      - media:/web_app/static/media
+      - ./web_app/web_app:/web_app
+      - /home/pi/media:/web_app/static/media
     depends_on:
       - postgres
 
@@ -20,10 +20,10 @@ services:
     ports:
       - 80:80
     volumes:
-      - media:/opt/static/media
+      - /home/pi/media:/opt/static/media
     depends_on:
       - web_app
-  
+
   postgres:
     image: arm32v7/postgres
     environment:
@@ -31,6 +31,8 @@ services:
       - POSTGRES_DB=cime
     volumes:
       - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   ui:
     build:
@@ -38,10 +40,10 @@ services:
       dockerfile: Dockerfile
     privileged: true
     volumes:
-      - media:/ui/assets
+      - /home/pi/media:/ui/assets
     depends_on:
       - web_app
+    network_mode: "host"
 
 volumes:
   pgdata: {}
-  media: {}
